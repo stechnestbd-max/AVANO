@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AVANO – Asian Fusion Restaurant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --dark: #1A1208;
+    --gold: #C8973A;
+    --gold-light: #E8C06A;
+    --red: #8B2B1A;
+    --warm-white: #FAF7F2;
+    --muted: #7A6E5F;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(26,18,8,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(200,151,58,0.25);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: rgba(245,240,232,0.75);
+    text-decoration: none;
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--gold);
+    color: var(--dark);
+    padding: 0.55rem 1.4rem;
+    border-radius: 2px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+  .nav-cta:hover { background: var(--gold-light); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--dark);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 4rem 4rem 5rem;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(200,151,58,0.4);
+    padding: 0.4rem 1rem;
+    margin-bottom: 2rem;
+    width: fit-content;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    line-height: 1.05;
+    color: var(--cream);
+    margin-bottom: 0.3rem;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-sub {
+    font-size: 0.9rem;
+    color: rgba(245,240,232,0.5);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    font-weight: 300;
+  }
+  .hero-desc {
+    font-size: 1rem;
+    color: rgba(245,240,232,0.65);
+    line-height: 1.8;
+    max-width: 380px;
+    margin-bottom: 3rem;
+    font-weight: 300;
+  }
+  .hero-actions { display: flex; gap: 1rem; align-items: center; }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--dark);
+    padding: 0.85rem 2rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .btn-secondary {
+    color: rgba(245,240,232,0.6);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s;
+  }
+  .btn-secondary:hover { color: var(--gold); }
+  .btn-secondary svg { transition: transform 0.3s; }
+  .btn-secondary:hover svg { transform: translateX(4px); }
+
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(200,151,58,0.15);
+  }
+  .stat-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.2rem;
+  }
+  .stat-label {
+    font-size: 0.72rem;
+    color: rgba(245,240,232,0.45);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* Hero Right - Visual Collage */
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-right::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, var(--dark) 0%, transparent 30%);
+    z-index: 1;
+  }
+  .hero-img-main {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0.7;
+  }
+  .hero-img-overlay {
+    position: absolute;
+    bottom: 3rem; right: 2rem;
+    width: 180px; height: 220px;
+    object-fit: cover;
+    border: 3px solid rgba(200,151,58,0.3);
+    z-index: 2;
+  }
+  /* Fallback pattern instead of images */
+  .hero-visual {
+    width: 100%; height: 100%;
+    background:
+      radial-gradient(ellipse at 70% 30%, rgba(200,151,58,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse at 30% 70%, rgba(139,43,26,0.15) 0%, transparent 60%),
+      #0D0A05;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 12rem;
+    opacity: 0.08;
+    color: var(--gold);
+    user-select: none;
+    overflow: hidden;
+    position: relative;
+  }
+  .hero-visual-pattern {
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 20px,
+      rgba(200,151,58,0.03) 20px,
+      rgba(200,151,58,0.03) 21px
+    );
+  }
+  .hero-badge {
+    position: absolute;
+    bottom: 3rem; right: 3rem;
+    z-index: 3;
+    background: rgba(26,18,8,0.85);
+    border: 1px solid rgba(200,151,58,0.35);
+    padding: 1.2rem 1.5rem;
+    text-align: center;
+    backdrop-filter: blur(8px);
+  }
+  .hero-badge-stars { color: var(--gold); font-size: 1.1rem; margin-bottom: 0.3rem; }
+  .hero-badge-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--cream);
+    line-height: 1;
+  }
+  .hero-badge-sub { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.25rem; }
+
+  /* MARQUEE */
+  .marquee-wrap {
+    background: var(--gold);
+    padding: 0.85rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee-inner {
+    display: inline-flex;
+    animation: marquee 20s linear infinite;
+    gap: 0;
+  }
+  .marquee-item {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--dark);
+    padding: 0 2.5rem;
+  }
+  .marquee-dot { opacity: 0.5; }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* SECTION BASE */
+  section { padding: 6rem 5rem; }
+  .section-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+  .section-sub {
+    font-size: 0.95rem;
+    color: var(--muted);
+    max-width: 480px;
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  /* ABOUT STRIP */
+  .about {
+    background: var(--dark);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    padding: 0;
+  }
+  .about-visual {
+    background: #120E05;
+    min-height: 500px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-kanji {
+    font-family: 'Playfair Display', serif;
+    font-size: 14rem;
+    color: rgba(200,151,58,0.06);
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    user-select: none;
+    white-space: nowrap;
+  }
+  .about-icon-row {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; align-items: center; gap: 1rem;
+  }
+  .about-icon {
+    width: 64px; height: 64px; border-radius: 50%;
+    border: 1px solid rgba(200,151,58,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem;
+  }
+  .about-content {
+    padding: 5rem;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .about-content .section-title { color: var(--cream); }
+  .about-content .section-sub { color: rgba(245,240,232,0.5); max-width: 100%; }
+  .about-list {
+    list-style: none;
+    margin-top: 2.5rem;
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+  .about-list li {
+    display: flex; align-items: flex-start; gap: 1rem;
+    color: rgba(245,240,232,0.6);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  .about-list li::before {
+    content: '';
+    width: 20px; height: 1px;
+    background: var(--gold);
+    margin-top: 0.65rem;
+    flex-shrink: 0;
+  }
+
+  /* MENU HIGHLIGHTS */
+  .menu-section { background: var(--warm-white); }
+  .menu-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 3.5rem;
+  }
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: rgba(0,0,0,0.06);
+  }
+  .menu-card {
+    background: var(--warm-white);
+    padding: 2.5rem 2rem;
+    transition: background 0.4s;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+  .menu-card:hover { background: #F0EBE0; }
+  .menu-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--gold);
+    transition: width 0.4s;
+  }
+  .menu-card:hover::after { width: 100%; }
+  .menu-cat {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .menu-emoji { font-size: 2rem; margin-bottom: 1rem; }
+  .menu-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    margin-bottom: 0.6rem;
+    color: var(--dark);
+  }
+  .menu-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.7; font-weight: 300; }
+  .menu-price {
+    display: inline-block;
+    margin-top: 1.2rem;
+    font-size: 0.85rem;
+    color: var(--dark);
+    font-weight: 500;
+    border-bottom: 1px solid rgba(200,151,58,0.4);
+  }
+  .menu-badge {
+    position: absolute; top: 1.5rem; right: 1.5rem;
+    background: var(--red);
+    color: #FAF0E8;
+    font-size: 0.6rem;
+    padding: 0.2rem 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* REVIEWS */
+  .reviews-section {
+    background: var(--dark);
+    padding: 6rem 5rem;
+  }
+  .reviews-section .section-title { color: var(--cream); }
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+  }
+  .review-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(200,151,58,0.12);
+    padding: 2rem;
+    transition: border-color 0.3s;
+  }
+  .review-card:hover { border-color: rgba(200,151,58,0.35); }
+  .review-stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 1.2rem; }
+  .review-text {
+    font-size: 0.92rem;
+    color: rgba(245,240,232,0.65);
+    line-height: 1.8;
+    font-style: italic;
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+  }
+  .review-author {
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .review-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(200,151,58,0.15);
+    border: 1px solid rgba(200,151,58,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; color: var(--gold); font-weight: 500;
+  }
+  .review-name { font-size: 0.82rem; color: rgba(245,240,232,0.7); font-weight: 500; }
+  .review-meta { font-size: 0.72rem; color: var(--muted); margin-top: 0.1rem; }
+
+  /* INFO STRIP */
+  .info-strip {
+    background: var(--gold);
+    padding: 3.5rem 5rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+  .info-item { display: flex; align-items: flex-start; gap: 1rem; }
+  .info-icon {
+    width: 42px; height: 42px; flex-shrink: 0;
+    background: rgba(26,18,8,0.1);
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+  }
+  .info-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(26,18,8,0.55);
+    margin-bottom: 0.3rem;
+  }
+  .info-val {
+    font-size: 0.88rem;
+    color: var(--dark);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  /* CTA */
+  .cta-section {
+    background: var(--warm-white);
+    padding: 7rem 5rem;
+    text-align: center;
+  }
+  .cta-section .section-title { margin: 0 auto 1rem; }
+  .cta-section .section-sub { margin: 0 auto 2.5rem; text-align: center; }
+  .cta-actions { display: flex; gap: 1rem; justify-content: center; }
+  .btn-outline {
+    border: 1px solid var(--dark);
+    color: var(--dark);
+    padding: 0.85rem 2rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .btn-outline:hover { background: var(--dark); color: var(--cream); }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    padding: 3rem 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(200,151,58,0.12);
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+  }
+  .footer-copy { font-size: 0.78rem; color: var(--muted); }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* ANIMATION */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 7rem 2rem 3rem; }
+    .hero-right { min-height: 300px; }
+    .about, .menu-grid, .reviews-grid { grid-template-columns: 1fr; }
+    .info-strip { grid-template-columns: 1fr 1fr; }
+    section, .reviews-section, .cta-section, .info-strip { padding: 4rem 2rem; }
+    .about-content { padding: 3rem 2rem; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">AVANO</a>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#visit">Visit</a></li>
+  </ul>
+  <a href="tel:01898876666" class="nav-cta">Reserve · 01898-876666</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <span class="hero-tag">Asian Fusion · Dhaka</span>
+    <h1 class="hero-title">
+      Where Asia<br>
+      <em>Meets Your</em><br>
+      Palate
+    </h1>
+    <p class="hero-sub">Level 9, Safura Tower · Dhaka 1216</p>
+    <p class="hero-desc">
+      A vibrant culinary journey through the finest flavours of Asia from soulful Japanese ramen to delicate sushi, crisp tempura, and bold Korean kimchi fried rice. Every dish, a celebration.
+    </p>
+    <div class="hero-actions">
+      <a href="tel:01898876666" class="btn-primary">Book a Table</a>
+      <a href="#menu" class="btn-secondary">
+        Explore Menu
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-val">4.8★</div>
+        <div class="stat-label">Google Rating</div>
+      </div>
+      <div>
+        <div class="stat-val">2,604</div>
+        <div class="stat-label">Reviews</div>
+      </div>
+      <div>
+        <div class="stat-val">৳400–600</div>
+        <div class="stat-label">Per Person</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="hero-visual-pattern"></div>
+      亜
+    </div>
+    <div class="hero-badge">
+      <div class="hero-badge-stars">★★★★★</div>
+      <div class="hero-badge-val">4.8</div>
+      <div class="hero-badge-sub">Google Reviews</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <span class="marquee-item">Sushi</span><span class="marquee-item marquee-dot">·</span>
+    <span class="marquee-item">Dynamite Prawn</span><span class="marquee-item marquee-dot">·</span>
+    <span class="marquee-item">Kimchi Fried Rice</span><span class="marquee-item marquee-dot">·</span>
+    <span class="marquee-item">Wonton in Rayu</span><span class="marquee-item marquee-dot">·</span>
+    <span class="marquee-item">Tempura</span><span class="marquee-item marquee-dot">·</span>
+    <span class="marquee-item">Cream of Mushroom Soup</span><span class="marquee-item marquee-dot">·</span>
+    <span class="marquee-item">Shumai</span><span class="marquee-item marquee-dot">·</span>
+    <span class="marquee-item">Chocolate Brownie</span><span class="marquee-item marquee-dot">·</span>
+    <span class="marquee-item">Kheer</span><span class="marquee-item marquee-dot">·</span>
+    <!-- Duplicate for seamless loop -->
+    <span class="marquee-item">Sushi</span><span class="marquee-item marquee-dot">·</span>
+    <span class="marquee-item">Dynamite Prawn</span><span class="marquee-item marquee-dot">·</span>
+    <span class="marquee-item">Kimchi Fried Rice</span><span class="marquee-item marquee-dot">·</span>
+    <span class="marquee-item">Wonton in Rayu</span><span class="marquee-item marquee-dot">·</span>
+    <span class="marquee-item">Tempura</span><span class="marquee-item marquee-dot">·</span>
+    <span class="marquee-item">Cream of Mushroom Soup</span><span class="marquee-item marquee-dot">·</span>
+    <span class="marquee-item">Shumai</span><span class="marquee-item marquee-dot">·</span>
+    <span class="marquee-item">Chocolate Brownie</span><span class="marquee-item marquee-dot">·</span>
+    <span class="marquee-item">Kheer</span><span class="marquee-item marquee-dot">·</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-visual">
+    <div class="about-kanji">味</div>
+    <div class="about-icon-row">
+      <div class="about-icon">🍱</div>
+      <div class="about-icon">🍣</div>
+      <div class="about-icon">🍜</div>
+    </div>
+  </div>
+  <div class="about-content">
+    <p class="section-tag">Our Story</p>
+    <h2 class="section-title fade-up" style="color: var(--cream);">Crafted with<br><em style="font-family:'Playfair Display',serif; color:var(--gold);">Passion &amp; Precision</em></h2>
+    <p class="section-sub fade-up">
+      Perched on Level 9 of Safura Tower, AVANO is Dhaka's premier Asian fusion dining destination — where bold flavours meet an elegant, vibrant atmosphere.
+    </p>
+    <ul class="about-list fade-up">
+      <li>Fresh, high-quality ingredients sourced daily for every dish</li>
+      <li>Expert staff who know the menu inside-out and offer thoughtful pairings</li>
+      <li>Dine-in, no-contact delivery, and drive-through options for your convenience</li>
+      <li>A warm, elegant ambience perfect for special occasions and everyday dining</li>
+    </ul>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="menu-header">
+    <div>
+      <p class="section-tag">Signature Dishes</p>
+      <h2 class="section-title">Our Most<br>Loved Flavours</h2>
+    </div>
+    <a href="tel:01898876666" class="btn-primary" style="align-self:flex-end">Full Menu on Call</a>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card">
+      <div class="menu-badge">Popular</div>
+      <div class="menu-cat">Signature</div>
+      <div class="menu-emoji">🔥</div>
+      <div class="menu-name">Avano Signature Dynamite Chicken</div>
+      <div class="menu-desc">Crispy fried chicken tossed in our signature dynamite sauce — spicy, creamy, and utterly addictive.</div>
+      <span class="menu-price">Must Try</span>
+    </div>
+    <div class="menu-card">
+      <div class="menu-badge">Popular</div>
+      <div class="menu-cat">Seafood</div>
+      <div class="menu-emoji">🍤</div>
+      <div class="menu-name">Dynamite Prawn</div>
+      <div class="menu-desc">Juicy prawns in our house-made dynamite glaze, served with a side of pickled ginger and cucumber.</div>
+      <span class="menu-price">Bestseller</span>
+    </div>
+    <div class="menu-card">
+      <div class="menu-cat">Noodles & Rice</div>
+      <div class="menu-emoji">🍚</div>
+      <div class="menu-name">Kimchi Fried Rice</div>
+      <div class="menu-desc">Smoky, tangy kimchi wok-fried with egg, scallions, and house seasoning. A Korean comfort classic.</div>
+      <span class="menu-price">Fan Favourite</span>
+    </div>
+    <div class="menu-card">
+      <div class="menu-cat">Soup</div>
+      <div class="menu-emoji">🥣</div>
+      <div class="menu-name">Cream of Mushroom Soup</div>
+      <div class="menu-desc">Velvety, rich mushroom bisque with a hint of truffle and crispy shallot garnish.</div>
+      <span class="menu-price">Starter</span>
+    </div>
+    <div class="menu-card">
+      <div class="menu-cat">Dim Sum</div>
+      <div class="menu-emoji">🥟</div>
+      <div class="menu-name">Shumai & Wonton in Rayu</div>
+      <div class="menu-desc">Handcrafted steamed dumplings and silky wontons bathed in aromatic chili rayu oil.</div>
+      <span class="menu-price">Chef's Pick</span>
+    </div>
+    <div class="menu-card">
+      <div class="menu-cat">Dessert</div>
+      <div class="menu-emoji">🍫</div>
+      <div class="menu-name">Chocolate Brownie & Kheer</div>
+      <div class="menu-desc">Warm, fudgy brownie with vanilla cream, alongside traditional creamy kheer with a contemporary twist.</div>
+      <span class="menu-price">Sweet Finish</span>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section" id="reviews">
+  <p class="section-tag">What Our Guests Say</p>
+  <h2 class="section-title" style="color:var(--cream);">Experiences Worth <em style="color:var(--gold)">Remembering</em></h2>
+  <div class="reviews-grid">
+    <div class="review-card fade-up">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"The food quality was good and the environment was very vibrant and elegant. The place has a nice atmosphere, and the location is also quite convenient."</p>
+      <div class="review-author">
+        <div class="review-avatar">SS</div>
+        <div>
+          <div class="review-name">Sakib Shahriar</div>
+          <div class="review-meta">Local Guide · 2 months ago</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card fade-up" style="transition-delay:0.15s">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"The waiter knew the menu by heart, was able to suggest recommendations and they served the food in proper order. Excellent service."</p>
+      <div class="review-author">
+        <div class="review-avatar">ST</div>
+        <div>
+          <div class="review-name">Shaniur T I M Nabi</div>
+          <div class="review-meta">Local Guide · 4 months ago</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card fade-up" style="transition-delay:0.3s">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"It turned out to be one of the best dining experiences we've ever had! Exceeded every expectation — food, ambience, and service all superb."</p>
+      <div class="review-author">
+        <div class="review-avatar">SJ</div>
+        <div>
+          <div class="review-name">Sharmin Jahan</div>
+          <div class="review-meta">Local Guide · 5 months ago</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INFO STRIP -->
+<div class="info-strip" id="visit">
+  <div class="info-item">
+    <div class="info-icon">📍</div>
+    <div>
+      <div class="info-label">Location</div>
+      <div class="info-val">House 45, Level 9, Safura Tower, Rd No. 7, Dhaka 1216</div>
+    </div>
+  </div>
+  <div class="info-item">
+    <div class="info-icon">🕐</div>
+    <div>
+      <div class="info-label">Hours</div>
+      <div class="info-val">Opens 12 PM Daily<br><span style="font-size:0.78rem; opacity:0.7">Check for holiday hours</span></div>
+    </div>
+  </div>
+  <div class="info-item">
+    <div class="info-icon">📞</div>
+    <div>
+      <div class="info-label">Reservations</div>
+      <div class="info-val">01898-876666</div>
+    </div>
+  </div>
+  <div class="info-item">
+    <div class="info-icon">🚗</div>
+    <div>
+      <div class="info-label">Options</div>
+      <div class="info-val">Dine-in · Drive-through<br>No-contact Delivery</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <p class="section-tag">Reserve Your Evening</p>
+  <h2 class="section-title">Your Table Awaits</h2>
+  <p class="section-sub">Whether it's a special celebration or a weekend indulgence, AVANO promises an experience that lingers long after the last bite.</p>
+  <div class="cta-actions">
+    <a href="tel:01898876666" class="btn-primary">Call to Reserve</a>
+    <a href="https://maps.google.com/?q=AVANO+Safura+Tower+Dhaka" target="_blank" class="btn-outline">Get Directions</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">AVANO</div>
+  <div class="footer-copy">© 2026 AVANO. All rights reserved.</div>
+  <div class="footer-links">
+    <a href="tel:01898876666">Contact</a>
+    <a href="#menu">Menu</a>
+    <a href="#visit">Visit</a>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
